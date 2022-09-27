@@ -1,14 +1,11 @@
 import axios from 'axios';
-import { Router, Request, Response } from 'express';
 import Country from './../models/Country';
 
-const countryRouter = Router()
-
-countryRouter.get('/', async (_req: Request, res: Response): Promise<Response> => {
-
+const createCountries = async () => {
     try {
+        const country = await Country.findOne();
+        if (country) return;
         const { data } = await axios('https://restcountries.com/v3.1/all');
-        console.log('ola');
         const allCountries = data.map((country: any) => {
             return {
                 id: country.cca3,
@@ -17,14 +14,10 @@ countryRouter.get('/', async (_req: Request, res: Response): Promise<Response> =
                 flag: country.flags.svg
             }
         })
-
         await Country.collection.insertMany(allCountries)
-
-        return res.send(data)
     } catch (error) {
         console.log(error)
-        return res.send(error)
     }
-})
+}
 
-export default countryRouter
+export default createCountries;
