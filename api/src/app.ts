@@ -4,6 +4,8 @@ import cors from 'cors'
 
 import routes from './routes/index'
 
+// import { IGame } from './models/Game';
+
 const app = express()
 
 app.set('port', process.env.PORT || 3001)
@@ -21,10 +23,6 @@ app.use((_, res, next) => {
     );
     res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
     return next();
-});
-
-app.get('/', (_, res) => {
-    res.send(`api ON at ${app.get('port')}`)
 });
 
 app.use(routes);
