@@ -1,3 +1,4 @@
+import { IGame } from '../models/Game';
 import { ICountry } from './../models/Country';
 
 export const shuffleArray = (array: ICountry[]): ICountry[] => {
@@ -10,4 +11,19 @@ export const shuffleArray = (array: ICountry[]): ICountry[] => {
     }
 
     return array;
+}
+
+export const factorizedGame = (game: IGame) => {
+    return {
+        ...game,
+        questions: game.questions.map((question) => {
+            return {
+                body: { flag: question.correct.flag, capital: question.correct.capital },
+                countries: question.countries.map(country => {
+                    return { id: country.id, name: country.name }
+                }),
+                type: question.type
+            }
+        })
+    }
 }

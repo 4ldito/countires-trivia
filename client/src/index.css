@@ -7,5 +7,5 @@
 }
 
 .full-container-height {
-    height: 32rem;
+    min-height: 32rem;
 }

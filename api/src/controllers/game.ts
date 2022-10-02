@@ -3,6 +3,7 @@ import { shuffleArray } from './../utils/utils';
 import { IGame, IQuestion } from '../models/Game';
 
 const TOTAL_QUESTIONS_PER_GAME = 5;
+const CATEGORIES = ['flag', 'capital']
 
 export let activeGames: IGame[] = []
 
@@ -23,6 +24,7 @@ export const createNewGame = (countries: ICountry[], user: string) => {
         const question = {
             correct,
             countries: questionContries,
+            type: Math.floor(Math.random() * CATEGORIES.length)
         }
         questions.push(question)
         i++;
@@ -38,4 +40,13 @@ export const createNewGame = (countries: ICountry[], user: string) => {
     }
     activeGames.push(newGame);
     return newGame;
+}
+
+export const setSelectedAnswer = (id: string, game: any) => {
+
+    const actualGame = activeGames.find(g => g.user === game.user)
+
+    console.log(id)
+    console.log(actualGame)
+
 }

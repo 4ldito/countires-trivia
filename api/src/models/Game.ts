@@ -4,6 +4,7 @@ import { ICountry } from "./Country";
 export interface IQuestion {
     correct: ICountry
     countries: ICountry[]
+    type: number
 }
 
 export interface IGame {

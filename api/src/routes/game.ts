@@ -2,6 +2,7 @@ import { Router, Request, Response } from 'express';
 import Country from './../models/Country';
 
 import { createNewGame } from './../controllers/game';
+import { factorizedGame } from '../utils/utils';
 
 /**
  * TODO:
@@ -26,21 +27,20 @@ gameRouter.get('/new-game', async (req: Request, res: Response): Promise<Respons
         const countries = await Country.find();
         const game = createNewGame(countries, user);
 
-        const factorizedGame = {
-            ...game,
-            questions: game.questions.map((question) => {
-                return {
-                    countries: question.countries.map(country => {
-                        return { id: country.id, flag: country.flag, name: country.name }
-                    })
-                }
-            })
-        }
-        return res.send(factorizedGame);
+        const actualGame = factorizedGame(game)
+        return res.send(actualGame);
     } catch (error) {
         console.log(error);
         return res.send(error);
     }
 })
+
+gameRouter.post('/answer', async (req: Request, res: Response): Promise<Response> => {
+    const { id, game } = req.body
+
+    console.log(id, game)
+
+    return res.send('ola');
+});
 
 export default gameRouter
