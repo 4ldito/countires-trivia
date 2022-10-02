@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react'
 
 const useNewGame = (user) => {
   const [game, setGame] = useState()
+  const [isGameLoading, setIsGameLoading] = useState(true)
+
   useEffect(() => {
     const asyncFunction = async () => {
       const { data } = await axios(`game/new-game?user=${user.nickname}`)
@@ -10,7 +12,12 @@ const useNewGame = (user) => {
     }
     asyncFunction()
   }, [])
-  return { game }
+
+  useEffect(() => {
+    if (game) setIsGameLoading(false)
+  }, [game])
+
+  return { game, isGameLoading }
 }
 
 export default useNewGame

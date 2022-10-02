@@ -1,6 +1,13 @@
 import { model, Schema, Document } from "mongoose";
 
-export interface ICountry extends Document{
+export interface ICountry {
+    id: string,
+    name: string,
+    capital: string,
+    flag: string
+}
+
+interface ICountryDocument extends Document{
     id: string,
     name: string,
     capital: string,
@@ -33,4 +40,4 @@ const countrySchema = new Schema({
     },
 })
 
-export default model<ICountry>('Country', countrySchema)
+export default model<ICountryDocument>('Country', countrySchema)

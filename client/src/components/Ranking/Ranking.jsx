@@ -4,7 +4,7 @@ import Button from '../Buttons/Button'
 const Ranking = ({ setRender }) => {
   return (
     <section>
-      <Button text='Back' onClick={() => setRender('home')} />
+      <Button onClick={() => setRender('home')}>Back</Button>
       <h2>Ranking</h2>
     </section>
   )

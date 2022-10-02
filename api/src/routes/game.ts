@@ -24,9 +24,19 @@ gameRouter.get('/new-game', async (req: Request, res: Response): Promise<Respons
 
     try {
         const countries = await Country.find();
-        createNewGame(countries, user);
+        const game = createNewGame(countries, user);
 
-        return res.send(countries);
+        const factorizedGame = {
+            ...game,
+            questions: game.questions.map((question) => {
+                return {
+                    countries: question.countries.map(country => {
+                        return { id: country.id, flag: country.flag, name: country.name }
+                    })
+                }
+            })
+        }
+        return res.send(factorizedGame);
     } catch (error) {
         console.log(error);
         return res.send(error);

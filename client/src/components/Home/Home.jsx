@@ -5,7 +5,7 @@ const Home = ({ user, setRender }) => {
   return (
     <div className='mx-4 text-center '>
       <h3>Welcome, {user.nickname}</h3>
-      <Button onClick={() => setRender('game')} text='Play' />
+      <Button onClick={() => setRender('game')}>Play</Button>
     </div>
   )
 }

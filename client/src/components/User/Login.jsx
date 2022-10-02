@@ -4,7 +4,7 @@ import Button from './../Buttons/Button'
 const Login = () => {
   const { loginWithPopup } = useAuth0()
   return (
-    <Button onClick={loginWithPopup} text='Log In' />
+    <Button onClick={loginWithPopup}>Log In</Button>
   )
 }
 
