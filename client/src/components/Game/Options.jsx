@@ -7,7 +7,7 @@ const Options = ({ setRender }) => {
   const refMenu = useRef(null)
 
   return (
-    <div className='absolute left-0 top-0'>
+    <div className='absolute right-0 top-0'>
       <button className=' transition-colors hover:text-dark-500 dark:hover:text-gray-300' onClick={() => refMenu.current.classList.toggle('hidden')}>
         <FiSettings />
       </button>

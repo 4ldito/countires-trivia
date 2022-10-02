@@ -6,7 +6,6 @@ import QuestionFlag from './Question/QuestionFlag'
 
 const Game = ({ setRender, user }) => {
   const { game, isGameLoading, setGame } = useNewGame(user)
-  // console.log(game)
 
   if (isGameLoading) return <Loading />
   return (

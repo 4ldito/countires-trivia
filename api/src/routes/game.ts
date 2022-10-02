@@ -1,7 +1,7 @@
 import { Router, Request, Response } from 'express';
 import Country from './../models/Country';
 
-import { createNewGame } from './../controllers/game';
+import { createNewGame, setSelectedAnswer } from './../controllers/game';
 import { factorizedGame } from '../utils/utils';
 
 /**
@@ -38,9 +38,11 @@ gameRouter.get('/new-game', async (req: Request, res: Response): Promise<Respons
 gameRouter.post('/answer', async (req: Request, res: Response): Promise<Response> => {
     const { id, game } = req.body
 
-    console.log(id, game)
+    const actualGame = setSelectedAnswer(id, game)
 
-    return res.send('ola');
+    if (!actualGame) throw new Error('error')
+
+    return res.send(factorizedGame(actualGame));
 });
 
 export default gameRouter

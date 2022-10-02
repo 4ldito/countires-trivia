@@ -42,11 +42,18 @@ export const createNewGame = (countries: ICountry[], user: string) => {
     return newGame;
 }
 
-export const setSelectedAnswer = (id: string, game: any) => {
+export const setSelectedAnswer = (id: string, game: any): IGame | false => {
 
     const actualGame = activeGames.find(g => g.user === game.user)
+    if (!actualGame) return false
 
-    console.log(id)
-    console.log(actualGame)
+    const isCorrect = actualGame.questions[actualGame.round].correct.id === id
 
+    if (isCorrect) actualGame.totalCorrect++
+    else actualGame.totalWrong++
+
+    // actualGame.totalQuestions++
+    actualGame.round++
+
+    return actualGame
 }
