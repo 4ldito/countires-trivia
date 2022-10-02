@@ -2,8 +2,9 @@ import { model, Schema, Document } from "mongoose";
 import { ICountry } from "./Country";
 
 export interface IQuestion {
-    correct: Object
+    correct: ICountry
     countries: ICountry[]
+    type: number
 }
 
 export interface IGame {
@@ -11,15 +12,17 @@ export interface IGame {
     questions: IQuestion[]
     totalCorrect: number
     totalWrong: number
+    round: number
     totalQuestions: number
 }
 
 
 export interface IGameDocument extends Document {
-    user: string,
-    questions: {},
-    totalWrong: number,
-    totalCorrect: number,
+    user: string
+    questions: IQuestion[]
+    totalCorrect: number
+    totalWrong: number
+    round: number
     totalQuestions: number
 }
 
@@ -30,7 +33,7 @@ const gameSchema = new Schema({
         trim: true
     },
     questions: {
-        type: Object,
+        type: Array,
         required: true,
     },
     totalWrong: {

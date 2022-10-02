@@ -8,7 +8,6 @@ countryRouter.get('/', async (_req: Request, res: Response): Promise<Response> =
 
     try {
         const { data } = await axios('https://restcountries.com/v3.1/all');
-        console.log('ola');
         const allCountries = data.map((country: any) => {
             return {
                 id: country.cca3,
