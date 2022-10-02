@@ -1,18 +1,21 @@
 import useNewGame from '../../hooks/useNewGame'
-import Button from '../Buttons/Button'
+
 import Loading from './../Loading/Loading'
+import Options from './Options'
+import QuestionFlag from './Question/QuestionFlag'
 
 const Game = ({ setRender, user }) => {
   const { game, isGameLoading } = useNewGame(user)
+  // console.log(game)
+
   if (isGameLoading) return <Loading />
-
-  console.log(game)
-
   return (
-    <section>
-      <Button onClick={() => setRender('home')}>Back</Button>
-      <h2>Game</h2>
-
+    <section className='flex items-center justify-center relative'>
+      <Options setRender={setRender} />
+      <div className='flex self-center justify-center flex-col items-center gap-6'>
+        <h3>Round {game.round + 1}</h3>
+        <QuestionFlag question={game.questions[game.round]} />
+      </div>
     </section>
   )
 }

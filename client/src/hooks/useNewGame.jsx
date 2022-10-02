@@ -17,7 +17,7 @@ const useNewGame = (user) => {
     if (game) setIsGameLoading(false)
   }, [game])
 
-  return { game, isGameLoading }
+  return { game, isGameLoading, setGame }
 }
 
 export default useNewGame
