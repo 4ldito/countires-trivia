@@ -2,16 +2,18 @@ import { useEffect, useState } from 'react'
 
 import ButtonQuestion from '../../Buttons/ButtonQuestion'
 import Loading from './../../Loading/Loading'
-import { questionAnswer } from '../../../controllers/questionAnswer'
+import { setSelectedAnswer } from '../../../controllers/questionAnswer'
 
 let interval
 
 const QuestionFlag = ({ question, game, setGame }) => {
   const [timer, setTimer] = useState(10)
   const [isImageLoaded, setIsImageLoaded] = useState(false)
+  const [alreadyAnswered, setAlreadyAnswered] = useState(false)
 
   const handleAnswer = (id) => {
-    questionAnswer(id, game).then((answer) => {
+    setAlreadyAnswered(true)
+    setSelectedAnswer(id, game).then((answer) => {
       console.log(answer)
     }).catch(err => console.log(err))
   }
@@ -42,12 +44,16 @@ const QuestionFlag = ({ question, game, setGame }) => {
               <p>This flags belongs to..</p>
               <div className='grid grid-cols-2 gap-12'>
                 {question.countries.map(country => {
-                  return <ButtonQuestion onClick={() => handleAnswer(country.id)} key={country.id}>{country.name}</ButtonQuestion>
+                  return <ButtonQuestion disabled={alreadyAnswered} onClick={() => handleAnswer(country.id)} key={country.id}>{country.name}</ButtonQuestion>
                 })}
               </div>
             </>
             )
-          : <span className='text-red-600'>Times up</span>}
+          : (
+            <div>
+              <span className='text-red-600'>Times up!</span>
+            </div>
+            )}
       </article>
       {!isImageLoaded && <Loading />}
     </>

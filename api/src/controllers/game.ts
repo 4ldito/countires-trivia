@@ -17,13 +17,13 @@ export const createNewGame = (countries: ICountry[], user: string) => {
 
     let i = 0;
     while (i < TOTAL_QUESTIONS_PER_GAME) {
-        const questionContries = countries.splice(0,4);
-        const correct = questionContries[0];
-        shuffleArray(questionContries);
+        const questionCountries = countries.splice(0,4);
+        const correct = questionCountries[0];
+        shuffleArray(questionCountries);
 
         const question = {
             correct,
-            countries: questionContries,
+            countries: questionCountries,
             type: Math.floor(Math.random() * CATEGORIES.length)
         }
         questions.push(question)
